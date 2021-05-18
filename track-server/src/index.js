@@ -13,8 +13,7 @@ app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
 //react-map-app mgdb cloud
-const mongoUri =
-  "mongodb+srv://react-map-app:react-map-app@cluster0.aiswg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"; //"mongodb://localhost:27017/track-map";
+const mongoUri ="urlhere";
 
 if (!mongoUri) {
   throw new Error(
