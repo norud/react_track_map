@@ -1,0 +1,19 @@
+expo r -c
+npm install react-navigation
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+npm install react-navigation-stack @react-native-community/masked-view
+npm install react-navigation-tabs
+Update Imports
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+
+SignupScreen.navigationOptions = () => {
+  return {
+    headerShown: false,
+  };
+};
+
+npm install @react-native-community/async-storage
+AuthContext 
+import AsyncStorage from "@react-native-community/async-storage";
