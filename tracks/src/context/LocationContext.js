@@ -12,6 +12,8 @@ const locationReducer = (state, action) => {
       return { ...state, locations: [...state.locations, action.payload] };
     case "change_name":
       return { ...state, name: action.payload };
+    case "reset":
+      return { ...state, name: "", locations: [] };
     default:
       return state;
   }
@@ -34,8 +36,11 @@ const addLocation = (dispatch) => (location, recording) => {
   }
 };
 
+const reset = (dispatch) => () => {
+  dispatch({ type: "reset" });
+};
 export const { Context, Provider } = createDataContext(
   locationReducer,
-  { startRecording, stopRecording, addLocation, changeName }, //to make available under the children componenets
-  { name: "", recording: false, locations: [], currentLocation: null } //this what we want to return
+  { startRecording, stopRecording, addLocation, changeName, reset }, //object with the different actions functions to make available under the children componenets
+  { name: "", recording: false, locations: [], currentLocation: null } //initial state that we want to return
 );
