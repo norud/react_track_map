@@ -7,20 +7,26 @@ import Map from "../components/Map";
 import { Context as LocationContext } from "../context/LocationContext";
 import useLocation from "../hooks/useLocation";
 import TrackForm from "../components/TrackForm";
+import { FontAwesome } from "@expo/vector-icons";
 
 const TrackCreateScreen = ({ isFocused }) => {
-  const { state, addLocation } = useContext(LocationContext);
+  const {
+    state: { recording },
+    addLocation,
+  } = useContext(LocationContext);
   //this solve te issue with useEffect
   //useEffect render just one time, thats way alway we have recording false
   //calback rerender if the date change
   const callback = useCallback(
+    //location we get from hooks/useLocation
     (location) => {
-      addLocation(location, state.recording);
+      //we pass the object locations
+      addLocation(location, recording);
     },
-    [state.recording]
+    [recording]
   );
 
-  const [err] = useLocation(isFocused, callback);
+  const [err] = useLocation(isFocused || recording, callback);
 
   return (
     <SafeAreaView forceInset={{ top: "always" }}>
@@ -35,6 +41,10 @@ const TrackCreateScreen = ({ isFocused }) => {
   );
 };
 
+TrackCreateScreen.navigationOptions = {
+  title: "Add Track",
+  tabBarIcon: <FontAwesome name="plus" fontSize={25} />,
+};
 const styles = StyleSheet.create({
   err: {
     margin: 10,

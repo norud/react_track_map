@@ -38,3 +38,22 @@ secicion #15 video 235
       setErr(e);
     }
   };
+
+  seccion #15 video  267
+  In src/screens/TrackListScreen, our FlatList component should now look like this:
+        <FlatList
+        data={state}
+        keyExtractor={(item) => item._id}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity>
+              <ListItem>
+                <ListItem.Content>
+                  <ListItem.Title>{item.name}</ListItem.Title>
+                </ListItem.Content>
+                <ListItem.Chevron />
+              </ListItem>
+            </TouchableOpacity>
+          );
+        }}
+      />
