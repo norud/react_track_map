@@ -10,9 +10,12 @@ import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
 import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import { Provider as Authprovider } from "./src/context/AuthContext";
-import { setNavigation } from "./src/NavigationRef";
+import { setNavigator } from "./src/NavigationRef";
+import OnRunAppScreen from "./src/screens/OnRunAppScreen";
+import { Provider as LocationProvider } from "./src/context/LocationContext";
 
 const switchNavigator = createSwitchNavigator({
+  OnRunAppScreen: OnRunAppScreen, //to not show sign up || sign in screen
   loginFlow: createStackNavigator({
     Signup: SignupScreen,
     SignIn: SignInScreen,
@@ -31,15 +34,17 @@ const App = createAppContainer(switchNavigator);
 
 export default () => {
   return (
-    <Authprovider>
-      {
-        //is hook to handle the ref to navigation
-      }
-      <App
-        ref={(navigator) => {
-          setNavigation(navigator);
-        }}
-      />
-    </Authprovider>
+    <LocationProvider>
+      <Authprovider>
+        {
+          //is hook to handle the ref to navigation
+        }
+        <App
+          ref={(navigator) => {
+            setNavigator(navigator);
+          }}
+        />
+      </Authprovider>
+    </LocationProvider>
   );
 };
