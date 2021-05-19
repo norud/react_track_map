@@ -88,6 +88,6 @@ const signout = (dispatch) => {
 };
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signup, signin, signout, clearErrorMessage, autoSigninIfHaveToken }, //to make enable on different screen
-  { token: null, errorMessage: "" }
+  { signup, signin, signout, clearErrorMessage, autoSigninIfHaveToken }, //object with the different actions functions to make available under the children componenets
+  { token: null, errorMessage: "" } //initial state that we want to return
 );
