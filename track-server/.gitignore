@@ -1,1 +1,3 @@
 node_modules/
+/src/url_mongodb.js
+.env

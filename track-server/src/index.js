@@ -1,3 +1,4 @@
+require("dotenv").config();
 require("./models/User");
 require("./models/Track");
 const express = require("express");
@@ -13,7 +14,7 @@ app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
 //react-map-app mgdb cloud
-const mongoUri ="urlhere";
+const mongoUri = process.env.MONGO_URL_DB; //"mongodb://localhost:27017/track-map";
 
 if (!mongoUri) {
   throw new Error(
@@ -36,6 +37,6 @@ app.get("/", requireAuth, (req, res) => {
   res.send(`Your email: ${req.user.email}`);
 });
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000");
+app.listen(4000, () => {
+  console.log("Listening on port 4000");
 });

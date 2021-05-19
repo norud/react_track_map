@@ -1,41 +1,32 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
-import { Text, Input, Button } from "react-native-elements";
-import Spacer from "../components/Spacer";
+import { NavigationEvents } from "react-navigation";
+import AuthForm from "../components/AuthForm";
+import NavLink from "../components/NavLink";
 import { Context as AuthContext } from "../context/AuthContext";
 
 const SignupScreen = ({ navigation }) => {
-  const { state, signup } = useContext(AuthContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { state, signup, clearErrorMessage } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
-      <Spacer>
-        <Text h3>Sign Up for Tracker</Text>
-      </Spacer>
-      <Input
-        label="Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        autoCorrect={false}
+      <NavigationEvents
+        //onWillFocus={() => {}}
+        //onDidFocus={() => {}}
+        //onblur means when leaves the screen(navigate away)
+        onWillFocus={clearErrorMessage} //both way are ok {() => {clearErrorMessage()}}
+        //onDidBlur={() => {}}
       />
-      <Spacer />
-      <Input
-        secureTextEntry
-        label="Password"
-        value={password}
-        onChangeText={setPassword}
-        autoCapitalize="none"
-        autoCorrect={false}
+      <AuthForm
+        headertext="Sign Up for Tracker"
+        errorMessage={state.errorMessage}
+        submitButtontext="Sign Up"
+        onSubmit={signup} //iquial {({ email, password }) => signup(email, password)}
       />
-      {state.errorMessage ? (
-        <Text style={styles.errorMessage}>{state.errorMessage}</Text>
-      ) : null}
-      <Spacer>
-        <Button title="Sign Up" onPress={() => signup({ email, password })} />
-      </Spacer>
+      <NavLink
+        routeName="SignIn"
+        text="Already have an account? Sign instead"
+      />
     </View>
   );
 };
@@ -49,13 +40,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    marginBottom: 250,
-  },
-  errorMessage: {
-    fontSize: 16,
-    color: "red",
-    marginLeft: 15,
-    marginTop: 15,
+    marginBottom: 245,
   },
 });
 

@@ -17,3 +17,24 @@ SignupScreen.navigationOptions = () => {
 npm install @react-native-community/async-storage
 AuthContext 
 import AsyncStorage from "@react-native-community/async-storage";
+
+secicion #15 video 220
+If you are using expo v39+ you will need to do the following:
+
+SigninScreen.navigationOptions = () => {
+  return {
+    headerShown: false,
+  };
+};
+
+secicion #15 video 235
+ const startWatching = async () => {
+    try {
+      const { granted } = await requestPermissionsAsync();
+      if (!granted) {
+        throw new Error('Location permission not granted');
+      }
+    } catch (e) {
+      setErr(e);
+    }
+  };
